@@ -74,12 +74,8 @@ function diffuse(b, s, Bs, diff, dt, iter, N)
     for k = 1, iter do
         for j = 2, N - 1 do
             for i = 2, N - 1 do
-                
                 s[i][j] = (Bs[i][j] + a * ( s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1] ) / ( 1 + 4 * a ) )
-
-
             end
-
             -- For Future, create boundary
         end
     end
