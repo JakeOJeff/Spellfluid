@@ -68,4 +68,21 @@ function diffuse(b, s, Bs, diff, dt, iter, N)
         iter = number of Gauss-Seidel iterations 
     ]]
 
+
+    local a = dt * diff * (N - 2)^2
+
+    for k = 1, iter do
+        for j = 2, N - 1 do
+            for i = 2, N - 1 do
+                
+                s[i][j] = (Bs[i][j] + a * ( s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1] ) / ( 1 + 4 * a ) )
+
+
+            end
+
+            -- For Future, create boundary
+        end
+    end
+
+
 end
