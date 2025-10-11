@@ -65,6 +65,7 @@ function diffuse(b, s, Bs, diff, dt, iter, N)
         
         s = latest diffused state
         Bs = previous diffused state ( source state )
+        iter = number of Gauss-Seidel iterations 
     ]]
 
 end
