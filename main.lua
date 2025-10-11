@@ -43,7 +43,7 @@ end
 
 
 -- Global force
-local function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
+function Force(Vx, Vy, Fx, Fy, x, y, radius, dt)
     
     --[[
     
@@ -77,7 +77,7 @@ local function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
 end
 
 
-local function diffuse(b, s, Bs, diff, dt, iter, N)
+function Diffuse(b, s, Bs, diff, dt, iter, N)
     --[[
         Laplacian ( using Laplacian Operator : 2X)
         ∇2X≈Xi−1,j​+Xi+1,j​+Xi,j−1​+Xi,j+1​−4Xi,j​
@@ -101,9 +101,15 @@ local function diffuse(b, s, Bs, diff, dt, iter, N)
             for i = 2, N - 1 do
                 s[i][j] = (Bs[i][j] + a * ( s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1] ) / ( 1 + 4 * a ) )
             end
-            -- For Future, create boundary
+            bound(b, s, N)
         end
     end
 
+
+end
+
+function Advect()
+
+    
 
 end
