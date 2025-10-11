@@ -20,7 +20,16 @@ function force(Vi, Vj, Fi, Fj, x, y, radius, dt)
     
     for i = (x - radius), (x + radius) do
         for j = (y - radius), (y + radius) do
-            
+            if i > 1 and i < N and j > 1 and j < N then
+                
+                local dx = i - x
+                local dy = j - y
+
+                local distanceSq = dx*dx + dy*dy
+                if distanceSq < radius * radius then
+                    
+                end
+            end
         end
     end
 end
