@@ -16,6 +16,14 @@ function exp(x) -- Exponential Function
     ]]
 end
 
+function bound(b, s, n)
+    
+    for i = 2, (n_- 1) do
+        s[i][1] = ( b == 2 ) and -s[i][2] or s[i][2] -- Bottom Bound
+        s[i][N] = ( b == 2 ) and -s[i][N-1] or s[i][N-1] -- Top Bound
+    end
+end
+
 
 -- Global force
 function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
