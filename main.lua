@@ -52,10 +52,19 @@ function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
 end
 
 
-function diffuse()
+function diffuse(b, s, Bs, diff, dt, iter, N)
     --[[
         Laplacian ( using Laplacian Operator : 2X)
         ∇2X≈Xi−1,j​+Xi+1,j​+Xi,j−1​+Xi,j+1​−4Xi,j​
+
+        b = boundary type ( 
+            0 - scalar,
+            1 - Vx ( Velocity x-axis )
+            2 - Vy ( Velocity y-axis )
+        )
+        
+        s = latest diffused state
+        Bs = previous diffused state ( source state )
     ]]
 
 end
