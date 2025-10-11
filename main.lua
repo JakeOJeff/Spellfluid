@@ -119,12 +119,29 @@ end
 
 function Advect(b, a, Ba, Vx, Vy, dt, N)
 
+    --[[
+        / Semi-Lagrangian Advection (Stam’s Method)
+
+        Transporting quantities across velocity field
+
+        Ba = pre advection
+        a = post advection
+
+        bilinear interpolation
+
+        note : this is backward tracing instead of forward integration, 
+        hence, the grid cell content depends on where it came from rather than
+        where it might or will go
+
+    ]]
+
     Bdt = dt * (N-2)
 
     for j = 2, N-1 do
         for i = 2, N-1 do
             
-            i0 = math.floor()
+            i0 = floor(clamp((i - Bdt * Vx[i][j]), 1.5, N - 0.5 ))
+            i1 = i0 + 1
 
         end
     end
