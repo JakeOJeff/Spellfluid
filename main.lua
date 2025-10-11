@@ -8,7 +8,7 @@ ITER = 8 -- Gauss–Seidel Iteration Method
 
 
 -- Helper Functions
-function exp(x) -- Exponential Function
+local function exp(x) -- Exponential Function
     return math.exp(x)
 
     --[[
@@ -16,7 +16,7 @@ function exp(x) -- Exponential Function
     ]]
 end
 
-function bound(b, s, N)
+local function bound(b, s, N)
     --[[
 
         Checks if it hits the bounds, if so, invert the velocity
@@ -38,13 +38,12 @@ function bound(b, s, N)
     s[1][N] = 0.5 * ( s[2][N] + s[1][N-1] )
     s[N][1] = 0.5 * ( s[N-1][1] + s[N][2] )
     s[N][N] = 0.5 * ( s[N-1][N] + s[N][N-1])
-    
-                
+             
 end
 
 
 -- Global force
-function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
+local function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
     
     --[[
     
@@ -78,7 +77,7 @@ function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
 end
 
 
-function diffuse(b, s, Bs, diff, dt, iter, N)
+local function diffuse(b, s, Bs, diff, dt, iter, N)
     --[[
         Laplacian ( using Laplacian Operator : 2X)
         ∇2X≈Xi−1,j​+Xi+1,j​+Xi,j−1​+Xi,j+1​−4Xi,j​
