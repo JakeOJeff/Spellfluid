@@ -16,6 +16,15 @@ local function exp(x) -- Exponential Function
     ]]
 end
 
+local function floor(x)
+    return math.floor(x)
+end
+
+local function clamp(value, lower, upper)
+    return math.max(lower, math.min(value, upper))
+end
+
+
 local function bound(b, s, N)
     --[[
 
@@ -108,8 +117,16 @@ function Diffuse(b, s, Bs, diff, dt, iter, N)
 
 end
 
-function Advect()
+function Advect(b, a, Ba, Vx, Vy, dt, N)
 
-    
+    Bdt = dt * (N-2)
+
+    for j = 2, N-1 do
+        for i = 2, N-1 do
+            
+            i0 = math.floor()
+
+        end
+    end
 
 end
