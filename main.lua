@@ -6,6 +6,18 @@ ITER = 8 -- Gauss–Seidel Iteration Method
 
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
+
+-- Helper Functions
+function exp(x) -- Exponential Function
+    return math.exp(x)
+
+    --[[
+        exp(x)= e^x | e ≈ 2.71828
+    ]]
+end
+
+
+-- Global force
 function force(Vi, Vj, Fi, Fj, x, y, radius, dt)
     
     --[[
