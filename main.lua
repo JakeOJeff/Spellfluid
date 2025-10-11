@@ -18,12 +18,12 @@ end
 
 
 -- Global force
-function force(Vi, Vj, Fi, Fj, x, y, radius, dt)
+function force(Vx, Vy, Fx, Fy, x, y, radius, dt)
     
     --[[
     
-        Vi, Vj = Velocity Field Array [ Gridwise ]
-        Fi, Fj = External Force Factor Parameter
+        Vx, Vy = Velocity Field Array [ Gridwise ]
+        Fx, Fy = External Force Factor Parameter
         x, y = Grid Position ( force center )
         radius = Range of influence
         dt = deltatime 
@@ -38,10 +38,16 @@ function force(Vi, Vj, Fi, Fj, x, y, radius, dt)
                 local dy = j - y
 
                 local distanceSq = dx*dx + dy*dy
-                if distanceSq < radius * radius then
-                    
+                local radiusSq = radius * radius
+                if distanceSq < radiusSq then
+                    local falloff = exp(-distanceSq / radiusSq ) -- 1 - ( distance / radius ) for linear interpolation
+                    Vx[i][j] = Vx[i][j] + Fx * falloff * dt
+                    Vy[i][j] = Vy[i][j] + Fy * falloff * dt 
+
+                    return Vx, Vy
                 end
             end
         end
     end
 end
+
