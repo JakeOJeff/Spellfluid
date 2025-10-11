@@ -17,10 +17,20 @@ function exp(x) -- Exponential Function
 end
 
 function bound(b, s, n)
-    
+    --[[
+
+        Checks if it hits the bounds, if so, invert the velocity
+
+        (1,1)      ...    (N,1)
+        .                  .
+        .                  .
+        (1,N)      ...    (N,N)
+    ]]
     for i = 2, (n_- 1) do
         s[i][1] = ( b == 2 ) and -s[i][2] or s[i][2] -- Bottom Bound
         s[i][N] = ( b == 2 ) and -s[i][N-1] or s[i][N-1] -- Top Bound
+        s[1][i] = ( b == 1 ) and -s[2][i] or s[2][i] -- Left Bound
+        s[N][i] = ( b == 1 ) and -s[N-1][i] or s[N-1][i] -- Right Bound
     end
 end
 
