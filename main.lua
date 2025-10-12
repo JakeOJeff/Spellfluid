@@ -15,8 +15,16 @@ function love.update(dt)
     local Fx, Fy =  0, 0
     local mx, my = love.mouse.getPosition()
     if love.mouse.isDown(1) then
+        --[[
+            Added +1 because Lua Table/Array Index starts at 1
+            ( Algorithm used was assumed to be 0 )
+        ]]  
+
         local normX = floor(mx / size) + 1
         local normY = floor(my / size) + 1
+
+        normX = clamp(normX, 2, N - 1)
+        normY = clamp(normY, 2, N - 1)
         fluid:addDensity(normX, normY, 100)
         fluid:addVelocity(normX, normY, 20 , 20)
     end
