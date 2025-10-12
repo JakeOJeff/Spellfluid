@@ -91,8 +91,8 @@ function Diffuse(b, s, Bs, diff, dt, iter, N)
             for i = 2, N - 1 do
                 s[i][j] = (Bs[i][j] + a * (s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1])) / (1 + 4 * a)
             end
-            bound(b, s, N)
         end
+        bound(b, s, N)
     end
 end
 
@@ -164,7 +164,7 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
 
 end
 
-function Project(Vx, Vy, p, div)
+function Project(Vx, Vy, p, div, N)
 
     --[[
 
@@ -210,16 +210,15 @@ function Project(Vx, Vy, p, div)
         end
     end
     bound(0, div)
-    bound(0, p)
+    bound(0, p, N)
 
     for k = 1, ITER do
         for j = 2, N - 1 do
             for i = 2, N - 1 do
                 p[i][j] = (div[i][j] + p[i - 1][j] + p[i + 1][j] + p[i][j - 1] + p[i][j + 1]) / 4
-
             end     
         end
-        bound(0 , p)
+        bound(0 , p, N)
     end
 
     for j = 2, N - 1 do
@@ -228,8 +227,8 @@ function Project(Vx, Vy, p, div)
             Vy[i][j] = Vy[i][j] - 0.5 * ( p[i][j + 1] - p[i][j - 1]) * N
         end
     end
-    bound(1, Vx)
-    bound(1, Vy)
+    bound(1, Vx, N)
+    bound(1, Vy, N)
 
 end
 
@@ -299,7 +298,7 @@ function fluid:simulate(dt)
     
     Diffuse(1, self.Vx0, self.Vx, VISC, dt, ITER, N)
     Diffuse(2, self.Vy0, self.Vy, VISC, dt, ITER, N)
-    Project(self.Vx0, self.Vy0, self.Vx, self.Vy)
+    Project(self.Vx0, self.Vy0, self.p, self.div, N)
 
     --[[
         advect velocity :-
@@ -310,7 +309,7 @@ function fluid:simulate(dt)
     
     Advect(1, self.Vx, self.Vx0, self.Vx0, self.Vy0, dt, N)
     Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt, N)
-    Project(self.Vx, self.Vy, self.Vx0, self.Vy0)
+    Project(self.Vx, self.Vy, self.p, self.div, N)
 
     --[[
         Smoke v, passively moved by velocity field
@@ -324,7 +323,7 @@ end
 
 function fluid:addDensity(x, y, amt)
     if x >= 1 and x <= N and y >= 1 and y <= N then
-        self.density[x][y] = self.density[x][y] + amt
+        self.s[x][y] = self.s[x][y] + amt
     end
 end
 
