@@ -285,15 +285,15 @@ function fluid:init()
 
 end
 
-function fluid.simulate(dt)
+function fluid:simulate(dt)
 
     --[[
         add viscosity :- 
         spread out velocity vals to neighbouring cells
     ]]
-    Diffuse()
-    Diffuse()
-    Project()
+    Diffuse(1, self.Vx0, self.Vx, VISC, dt)
+    Diffuse(2, self.Vy0, self.Vy, VISC, dt)
+    Project(self.Vx0, self.Vy0, self.Vx, self.Vy)
 
 end
 
