@@ -243,6 +243,8 @@ function fluid:init()
             Vx -> horizontal (x-axis) velocity
             Vy -> vertical (y-axis) velocity
 
+            Vx0 -> Temporary velocity field
+
         }
 
     ]]
