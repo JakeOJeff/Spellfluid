@@ -42,14 +42,7 @@ function love.mousemoved(x, y, dx, dy)
             Added +1 because Lua Table/Array Index starts at 1
             ( Algorithm used was assumed to be 0 )
         ]]  
-
-        local normX = floor(x / size) + 1
-        local normY = floor(y / size) + 1
-
-        normX = clamp(normX, 2, N - 1)
-        normY = clamp(normY, 2, N - 1)
-        fluid:addDensity(normX, normY, mouseDensity)
-        fluid:addVelocity(normX, normY, 20 * dx , 20 * dy)
+        fluid:create(x, y, dx, dy, mouseDensity, 20, 20)
     end
 end
 
