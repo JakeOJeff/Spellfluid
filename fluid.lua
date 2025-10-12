@@ -357,4 +357,33 @@ function fluid:clear(x, y)
     self:addDensity(normX, normY, -100)
 end
 
+function fluid:solidCircle(cx, cy, radius)
+
+    --[[
+    
+        cx, cy - center of hte circle in grid coords
+        radius - radius of circle
+
+        Marking the circle points as 1 on the boundary to denote solid
+        To make the fluid not interact with the solid, set the velocity
+        to zero
+    ]]
+    
+    for i = 1, N do
+        for j = 1, N do
+            local dx = i - cx
+            local dy = j - cy
+            local distSq = dx * dx + dy * dy
+
+            if distSq <= radius * radius then
+                self.boundary[i][j] = 1 
+                self.Vx[i][j] = 0
+                self.Vy[i][j] = 0
+            end
+        end
+    end
+
+
+end
+
 return fluid
