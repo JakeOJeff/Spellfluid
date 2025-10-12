@@ -304,15 +304,17 @@ function fluid:simulate(dt)
     Advect(1, self.Vx, self.Vx0, self.Vx0, self.Vy0, dt)
     Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt)
     Project(self.Vx, self.Vy, self.Vx0, self.Vy0)
-    
+
 end
 
 
+-- Helper functions forward
 
-
-
-
-
+function fluid:addDensity(x, y, amt)
+    if x > 1 and x < N and y > 1 and y < N then
+        self.density[x][y] = self.density[x][y] + amt
+    end
+end
 
 
 return fluid
