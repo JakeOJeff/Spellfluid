@@ -171,7 +171,8 @@ function Project(Vx, Vy, p, div)
             p[i][j] = 0
         end
     end
-
+    bound(0, div)
+    bound(0, p)
 
     for k = 1, ITER do
         for j = 2, N - 1 do
