@@ -7,9 +7,8 @@ function exp(x) -- Exponential Function
     ]]
 end
 
-function floor(x)
-    return math.floor(x)
-end
+floor = math.floor
+
 
 function clamp(value, lower, upper)
     return math.max(lower, math.min(value, upper))

@@ -5,7 +5,7 @@ local fluid = {}
 N = 64   -- resolution
 ITER = 8 -- Gauss–Seidel Iteration Method
 DIFF = 0.0001
-VISC = 0.001
+VISC = 0.0001
 
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
