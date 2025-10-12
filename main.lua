@@ -108,6 +108,8 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
         where it might or will go
 
 
+        ALGORTIHM GENERATED : 
+
         function advect(b, d, d0, Vx, Vy, dt, N):
             dt0 = dt * (N-2)
             for j = 2 to N-1:
@@ -149,7 +151,10 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
             local t1 = y - j0
             local t0 = 1 - t1
 
+            a[i][j] = s0 * ( t0 * Ba[i0][j0] + t1 * Ba[i0][j1] ) +
+                      s1 * ( t0 * Ba[i1][j0] + t1 * Ba[i1][j1] )
             
         end
+        bound(b, a, N)
     end
 end
