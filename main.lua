@@ -5,11 +5,14 @@ local fluid = require "fluid"
 local mouseDensity = 100
 
 function love.load()
-    size = 8
+
+    wW, wH = 512, 512
+
+    size = wW / N 
 
     fluid:init()
 
-    love.window.setMode(N * size, N * size)
+    love.window.setMode(wW, wH)
 end
 
 
