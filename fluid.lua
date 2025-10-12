@@ -271,7 +271,7 @@ function fluid:init()
         self.density[i] = {}
         self.Vx[i], self.Vy[i] = {}, {}
         self.Vx0[i], self.Vy0[i] = {}, {}     
-        self.s[i], self.s0 = {}, {}
+        self.s[i], self.s0[i] = {}, {}
 
         for j = 1, N do
             
