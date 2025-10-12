@@ -2,7 +2,7 @@ local fluid = {}
 
 -- GLOBALS
 
-N = 24   -- resolution
+N = 64   -- resolution
 ITER = 8 -- Gauss–Seidel Iteration Method
 DIFF = 0.0001
 VISC = 0.001
@@ -308,6 +308,11 @@ function fluid:simulate(dt)
     Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt, N)
     Project(self.Vx, self.Vy, self.Vx0, self.Vy0)
 
+    --[[
+        Smoke v, passively moved by velocity field
+    ]]
+    Diffuse(0, self.s0, self.s, DIFF, dt, ITER, N)
+    Advect(0, self.s, self.s0, self.Vx, self.Vy, dt, N)
 end
 
 
