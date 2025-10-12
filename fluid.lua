@@ -2,7 +2,7 @@ local fluid = {}
 
 -- GLOBALS
 
-N = 64   -- resolution
+N = 128   -- resolution
 ITER = 8 -- Gauss–Seidel Iteration Method
 DIFF = 0.0001
 VISC = 0.0001

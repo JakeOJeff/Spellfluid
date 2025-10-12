@@ -6,7 +6,7 @@ local mouseDensity = 100
 
 function love.load()
 
-    wW, wH = 512, 512
+    wW, wH = 720, 720
 
     size = wW / N 
 
@@ -60,5 +60,20 @@ function love.wheelmoved(x, y)
         mouseDensity = mouseDensity + 20
     elseif y < 0 and mouseDensity > 20 then
         mouseDensity = mouseDensity - 20
+    end
+end
+
+function love.keypressed(key)
+    if key == "up" and N < 256 then
+        N = N * 2
+        size = wW/N
+        fluid:init()
+
+    elseif key == "down" and N > 32 then
+        N = N /2 
+        size = wW/N
+        fluid:init()
+    elseif key == "c" then
+        fluid:init()
     end
 end
