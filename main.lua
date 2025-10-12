@@ -12,7 +12,16 @@ end
 
 
 function love.update(dt)
-    
+    local Fx, Fy =  0, 0
+    local mx, my = love.mouse.getPosition()
+    if love.mouse.isDown(1) then
+        local normX = floor(mx / size)
+        local normY = floor(my / size)
+        fluid:addDensity(normX, normY, 100)
+        fluid:addVelocity(normX, normY, 20 , 20)
+    end
+
+    fluid:simulate(dt)
 end
 
 function love.draw()
