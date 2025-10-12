@@ -243,8 +243,10 @@ function fluid:init()
             Vx -> horizontal (x-axis) velocity
             Vy -> vertical (y-axis) velocity
 
-            Vx0 -> Temporary velocity field
+            Vx0, Vy0 -> Temporary velocity field
 
+            s -> Scalar Field of current density
+            s0 -> Scalar Field of previous field
         }
 
     ]]
