@@ -142,12 +142,12 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
 
     for j = 2, N - 1 do
         for i = 2, N - 1 do
-            x = clamp((i - Bdt * Vx[i][j]), 1.5, N - 0.5)
-            y = clamp((j - Bdt * Vy[i][j]), 1.5, N - 0.5)
-            i0 = floor(x)
-            i1 = i0 + 1
-            j0 = floor(y)
-            j1 = j0 + 1
+            local x = clamp((i - Bdt * Vx[i][j]), 1.5, N - 0.5)
+            local y = clamp((j - Bdt * Vy[i][j]), 1.5, N - 0.5)
+            local i0 = floor(x)
+            local i1 = i0 + 1
+            local j0 = floor(y)
+            local j1 = j0 + 1
 
             local s1 = x - i0
             local s0 = 1 - s1
