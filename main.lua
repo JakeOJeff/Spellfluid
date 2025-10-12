@@ -53,8 +53,12 @@ function love.mousemoved(x, y, dx, dy)
     end
 end
 
+
+
 function love.wheelmoved(x, y)
-    if y > 0 then
+    if y > 0 and mouseDensity < 200 then
         mouseDensity = mouseDensity + 20
+    elseif y < 0 then
+        mouseDensity = mouseDensity - 20
     end
 end
