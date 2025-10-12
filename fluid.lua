@@ -291,8 +291,9 @@ function fluid:simulate(dt)
         add viscosity :- 
         spread out velocity vals to neighbouring cells
     ]]
-    Diffuse(1, self.Vx0, self.Vx, VISC, dt)
-    Diffuse(2, self.Vy0, self.Vy, VISC, dt)
+    
+    Diffuse(1, self.Vx0, self.Vx, VISC, dt, ITER, N)
+    Diffuse(2, self.Vy0, self.Vy, VISC, dt, ITER, N)
     Project(self.Vx0, self.Vy0, self.Vx, self.Vy)
 
     --[[
@@ -301,8 +302,9 @@ function fluid:simulate(dt)
         project to keep it incompressible post movement
     
     ]]
-    Advect(1, self.Vx, self.Vx0, self.Vx0, self.Vy0, dt)
-    Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt)
+    
+    Advect(1, self.Vx, self.Vx0, self.Vx0, self.Vy0, dt, N)
+    Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt, N)
     Project(self.Vx, self.Vy, self.Vx0, self.Vy0)
 
 end
