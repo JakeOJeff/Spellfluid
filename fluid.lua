@@ -60,11 +60,11 @@ function Force(Vx, Vy, Fx, Fy, x, y, radius, dt)
                     Vx[i][j] = Vx[i][j] + Fx * falloff * dt
                     Vy[i][j] = Vy[i][j] + Fy * falloff * dt
 
-                    return Vx, Vy
                 end
             end
         end
     end
+    return Vx, Vy
 end
 
 function Diffuse(b, s, Bs, diff, dt, iter, N)
@@ -84,12 +84,12 @@ function Diffuse(b, s, Bs, diff, dt, iter, N)
     ]]
 
 
-    local a = dt * diff * (N - 2) ^ 2
+    local a = dt * diff * (N - 2) * (N - 2)
 
     for k = 1, iter do
         for j = 2, N - 1 do
             for i = 2, N - 1 do
-                s[i][j] = (Bs[i][j] + a * (s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1]) / (1 + 4 * a))
+                s[i][j] = (Bs[i][j] + a * (s[i - 1][j] + s[i + 1][j] + s[i][j - 1] + s[i][j + 1])) / (1 + 4 * a)
             end
             bound(b, s, N)
         end
