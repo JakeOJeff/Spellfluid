@@ -20,6 +20,16 @@ local function bound(b, s, n)
         .                  .
         (1,N)      ...    (N,N)
     ]]
+    
+    for i = 2, (N - 1) do
+        for j = 2, (N - 1) do
+            if fluid.boundary[i][j] == 1 then
+                s[i][j] = 0 
+            end
+        end
+    end
+
+
     for i = 2, (N - 1) do
         s[i][1] = (b == 2) and -s[i][2] or s[i][2]       -- Bottom Bound
         s[i][N] = (b == 2) and -s[i][N - 1] or s[i][N - 1] -- Top Bound
