@@ -9,7 +9,8 @@ VISC = 0.001
 
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
-local function bound(b, s, N)
+local function bound(b, s, n)
+    N = n or N
     --[[
 
         Checks if it hits the bounds, if so, invert the velocity
