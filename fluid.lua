@@ -166,6 +166,11 @@ function Project(Vx, Vy, p, div)
 
     --[[
 
+
+        Vx, Vy = Velocity field components
+        p = pressure field
+        div = divergence map
+
         Information Stated below are sourced externally [ Algorithms are compiled using Artifical Intelligence ]
     
         Making fluid incompressible
@@ -259,7 +264,13 @@ end
 
 function fluid.simulate(dt)
 
-    
+    --[[
+        add viscosity :- 
+        spread out velocity vals to neighbouring cells
+    ]]
+    Diffuse()
+    Diffuse()
+    Project()
 
 end
 
