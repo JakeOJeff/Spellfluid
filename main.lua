@@ -14,6 +14,11 @@ end
 
 function love.update(dt)
     fluid:simulate(dt)
+
+    if love.keyboard.isDown("e") then
+        fluid:create(0, wH/2, 1, 0, mouseDensity * 2, 20, 0)
+    end        
+
 end
 
 function love.draw()
