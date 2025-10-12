@@ -44,7 +44,7 @@ function love.draw()
     ]]
     for i = 1, N do
         for j = 1, N do
-            local d = fluid.density[i][j]
+            local d = math.min(fluid.s[i][j] / 100, 1)
             love.graphics.setColor(1,1,1,d) -- Setting color transparency ~ density
             love.graphics.rectangle("fill", (i-1) * size, (j-1)*size, size, size ) -- Drawing grid elements
         end
