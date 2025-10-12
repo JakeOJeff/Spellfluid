@@ -12,7 +12,6 @@ end
 
 
 function love.update(dt)
-    local Fx, Fy =  0, 0
     local mx, my = love.mouse.getPosition()
     if love.mouse.isDown(1) then
         --[[
@@ -45,7 +44,7 @@ function love.draw()
     for i = 1, N do
         for j = 1, N do
             local d = math.min(fluid.s[i][j] / 100, 1)
-            love.graphics.setColor(1,1,1,d) -- Setting color transparency ~ density
+            love.graphics.setColor(d, d, d, 1) -- Setting color transparency ~ density
             love.graphics.rectangle("fill", (i-1) * size, (j-1)*size, size, size ) -- Drawing grid elements
         end
     end
