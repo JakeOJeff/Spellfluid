@@ -295,6 +295,16 @@ function fluid:simulate(dt)
     Diffuse(2, self.Vy0, self.Vy, VISC, dt)
     Project(self.Vx0, self.Vy0, self.Vx, self.Vy)
 
+    --[[
+        advect velocity :-
+        moves the velocity field itself according to own flow ( self-advect )
+        project to keep it incompressible post movement
+    
+    ]]
+    Advect(1, self.Vx, self.Vx0, self.Vx0, self.Vy0, dt)
+    Advect(2, self.Vy, self.Vy0, self.Vx0, self.Vy0, dt)
+    Project(self.Vx, self.Vy, self.Vx0, self.Vy0)
+    
 end
 
 
