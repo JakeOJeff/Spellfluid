@@ -2,6 +2,8 @@ require "utils"
 
 local fluid = require "fluid"
 
+local mouseDensity = 100
+
 function love.load()
     size = 8
 
@@ -46,7 +48,13 @@ function love.mousemoved(x, y, dx, dy)
 
         normX = clamp(normX, 2, N - 1)
         normY = clamp(normY, 2, N - 1)
-        fluid:addDensity(normX, normY, 100)
+        fluid:addDensity(normX, normY, mouseDensity)
         fluid:addVelocity(normX, normY, 20 * dx , 20 * dy)
+    end
+end
+
+function love.wheelmoved(x, y)
+    if y > 0 then
+        mouseDensity = mouseDensity + 20
     end
 end
