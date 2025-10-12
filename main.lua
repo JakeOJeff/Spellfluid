@@ -15,8 +15,17 @@ end
 function love.update(dt)
     fluid:simulate(dt)
 
-    if love.keyboard.isDown("e") then
+    if love.keyboard.isDown("d") then
         fluid:create(0, wH/2, 1, 0, mouseDensity * 2, 20, 0)
+    end        
+    if love.keyboard.isDown("a") then
+        fluid:create(wW, wH/2, -1, 0, mouseDensity * 2, 20, 0)
+    end        
+    if love.keyboard.isDown("s") then
+        fluid:create(wW/2, 0, 0, 1, mouseDensity * 2, 0, 20)
+    end        
+    if love.keyboard.isDown("w") then
+        fluid:create(wW/2, wH, 0, -1, mouseDensity * 2, 0, 20)
     end        
 
 end
