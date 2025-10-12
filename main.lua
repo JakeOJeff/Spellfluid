@@ -7,11 +7,8 @@ local mouseDensity = 100
 function love.load()
 
     wW, wH = 720, 720
-
     size = wW / N 
-
     fluid:init()
-
     love.window.setMode(wW, wH)
 end
 

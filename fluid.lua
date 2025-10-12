@@ -258,6 +258,7 @@ function fluid:init()
     self.s0 = {}
     self.p = {}
     self.div = {}
+    self.boundary = {}
 
     -- 2 dimensional array setup, i for colums and j for rows, using table in table method
     
@@ -269,6 +270,8 @@ function fluid:init()
             { 0, 0, 0}
         }
 
+        For boundary, 0 = fluid, 1 = solid
+
     ]]
     for i = 1, N do
         self.density[i] = {}
@@ -276,13 +279,14 @@ function fluid:init()
         self.Vx0[i], self.Vy0[i] = {}, {}     
         self.s[i], self.s0[i] = {}, {}
         self.p[i], self.div[i] = {}, {}
-
+        self.boundary[i] = {}
         for j = 1, N do
             self.density[i][j] = 0
             self.Vx[i][j], self.Vy[i][j] = 0, 0
             self.Vx0[i][j], self.Vy0[i][j] = 0, 0
             self.s[i][j], self.s0[i][j] = 0, 0
             self.p[i][j], self.div[i][j] = 0, 0
+            self.boundary[i][j] = 0
         end
 
     end
