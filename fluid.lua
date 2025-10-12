@@ -159,8 +159,9 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
                       s1 * ( t0 * Ba[i1][j0] + t1 * Ba[i1][j1] )
             
         end
-        bound(b, a, N)
     end
+    bound(b, a, N)
+
 end
 
 function Project(Vx, Vy, p, div)
@@ -256,6 +257,8 @@ function fluid:init()
     self.Vx0, self.Vy0 = {}, {}
     self.s = {}
     self.s0 = {}
+    self.p = {}
+    self.div = {}
 
     -- 2 dimensional array setup, i for colums and j for rows, using table in table method
     
@@ -273,13 +276,14 @@ function fluid:init()
         self.Vx[i], self.Vy[i] = {}, {}
         self.Vx0[i], self.Vy0[i] = {}, {}     
         self.s[i], self.s0[i] = {}, {}
+        self.p[i], self.div[i] = {}, {}
 
         for j = 1, N do
-            
             self.density[i][j] = 0
             self.Vx[i][j], self.Vy[i][j] = 0, 0
             self.Vx0[i][j], self.Vy0[i][j] = 0, 0
             self.s[i][j], self.s0[i][j] = 0, 0
+            self.p[i][j], self.div[i][j] = 0, 0
         end
 
     end
