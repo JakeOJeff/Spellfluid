@@ -335,14 +335,22 @@ function fluid:addVelocity(x, y, amtX, amtY)
 end
 
 function fluid:create(x, y, dx, dy, density, Vx, Vy)
-    
-        local normX = floor(x / size) + 1
-        local normY = floor(y / size) + 1
+    local normX = floor(x / size) + 1
+    local normY = floor(y / size) + 1
 
-        normX = clamp(normX, 2, N - 1)
-        normY = clamp(normY, 2, N - 1)
-        self:addDensity(normX, normY, density)
-        self:addVelocity(normX, normY, Vx * dx , Vy * dy)
+    normX = clamp(normX, 2, N - 1)
+    normY = clamp(normY, 2, N - 1)
+    self:addDensity(normX, normY, density)
+    self:addVelocity(normX, normY, Vx * dx , Vy * dy)
+end
+
+function fluid:clear(x, y)
+    local normX = floor(x / size) + 1
+    local normY = floor(y / size) + 1
+
+    normX = clamp(normX, 2, N - 1)
+    normY = clamp(normY, 2, N - 1)
+    self:addDensity(normX, normY, 100)
 end
 
 return fluid
