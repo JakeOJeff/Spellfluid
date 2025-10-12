@@ -43,6 +43,8 @@ function love.mousemoved(x, y, dx, dy)
             ( Algorithm used was assumed to be 0 )
         ]]  
         fluid:create(x, y, dx, dy, mouseDensity, 20, 20)
+    elseif love.mouse.isDown(2) then
+        fluid:create(x, y, dx, dy, -mouseDensity, 20, 20)
     end
 end
 
@@ -51,7 +53,7 @@ end
 function love.wheelmoved(x, y)
     if y > 0 and mouseDensity < 200 then
         mouseDensity = mouseDensity + 20
-    elseif y < 0 then
+    elseif y < 0 and mouseDensity > 20 then
         mouseDensity = mouseDensity - 20
     end
 end
