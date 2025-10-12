@@ -6,10 +6,6 @@ ITER = 8 -- Gauss–Seidel Iteration Method
 
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
-
-
-
-
 local function bound(b, s, N)
     --[[
 
@@ -140,10 +136,20 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
 
     for j = 2, N - 1 do
         for i = 2, N - 1 do
-            i0 = floor(clamp((i - Bdt * Vx[i][j]), 1.5, N - 0.5))
+            x = clamp((i - Bdt * Vx[i][j]), 1.5, N - 0.5)
+            y = clamp((j - Bdt * Vy[i][j]), 1.5, N - 0.5)
+            i0 = floor(x)
             i1 = i0 + 1
-            j0 = floor(clamp((j - Bdt * Vy[i][j]), 1.5, N - 0.5))
+            j0 = floor(y)
             j1 = j0 + 1
+
+            local s1 = x - i0
+            local s0 = 1 - s1
+
+            local t1 = y - j0
+            local t0 = 1 - t1
+
+            
         end
     end
 end
