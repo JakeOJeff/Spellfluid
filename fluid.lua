@@ -184,6 +184,14 @@ function Project(Vx, Vy, p, div)
         bound(0 , p)
     end
 
+    for j = 2, N - 1 do
+        for i = 2, N - 1 do
+            Vx[i][j] = Vx[i][j] - 0.5 * ( p[i + 1][j] - p[i - 1][j]) * N
+            Vy[i][j] = Vy[i][j] - 0.5 * ( p[i][j + 1] - p[i][j - 1]) * N
+        end
+    end
+    bound(1, Vx)
+    bound(1, Vy)
 
 end
 
