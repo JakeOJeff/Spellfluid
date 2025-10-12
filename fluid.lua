@@ -162,6 +162,30 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
     end
 end
 
+function Project(Vx, Vy, p, div)
+
+
+    for j = 2, N - 1 do
+        for i = 2, N - 1 do
+            div[i][j] = -0.5 * (Vx[i + 1][j] - Vx[i - 1][j] + Vy[i][j + 1] - Vy[i][j - 1]) / N
+            p[i][j] = 0
+        end
+    end
+
+
+    for k = 1, ITER do
+        for j = 2, N - 1 do
+            for i = 2, N - 1 do
+                p[i][j] = (div[i][j] + p[i - 1][j] + p[i + 1][j] + p[i][j - 1] + p[i][j + 1]) / 4
+
+            end     
+        end
+        bound(0 , p)
+    end
+
+
+end
+
 
 function fluid:init()
 
