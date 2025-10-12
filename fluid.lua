@@ -234,8 +234,23 @@ end
 
 function fluid:init()
 
+    --[[
+    
+        fluid = {
+        
+            density -> Scalar field representing the amount of substance
+                       each cell 
+            Vx -> horizontal (x-axis) velocity
+            Vy -> vertical (y-axis) velocity
+
+        }
+
+    ]]
     self.density = {}
     self.Vx, self.Vy = {}, {}
+    self.Vx0, self.Vy0 = {}, {}
+    self.s = {}
+    self.s0 = {}
 
     -- 2 dimensional array setup, i for colums and j for rows, using table in table method
     
@@ -251,11 +266,15 @@ function fluid:init()
     for i = 1, N do
         self.density[i] = {}
         self.Vx[i], self.Vy[i] = {}, {}
+        self.Vx0[i], self.Vy0[i] = {}, {}     
+        self.s[i], self.s0 = {}, {}
 
         for j = 1, N do
             
             self.density[i][j] = 0
             self.Vx[i][j], self.Vy[i][j] = 0, 0
+            self.Vx0[i][j], self.Vy0[i][j] = 0, 0
+            self.s[i][j], self.s0[i][j] = 0, 0
         end
 
     end
