@@ -163,7 +163,35 @@ function Advect(b, a, Ba, Vx, Vy, dt, N)
 end
 
 
+function fluid:init()
 
+    self.density = {}
+    self.Vx, self.Vy = {}, {}
+
+    -- 2 dimensional array setup, i for colums and j for rows, using table in table method
+    
+    --[[
+        { 
+            { 0, 0, 0}
+        }
+        {
+            { 0, 0, 0}
+        }
+
+    ]]
+    for i = 1, N do
+        self.density[i] = {}
+        self.Vx[i], self.Vy[i] = {}, {}
+
+        for j = 1, N do
+            
+            self.density[i][j] = 0
+            self.Vx[i][j], self.Vy[i][j] = 0, 0
+        end
+
+    end
+
+end
 
 
 
