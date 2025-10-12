@@ -5,7 +5,7 @@ local fluid = require "fluid"
 function love.load()
     size = 8
 
-    fluid.init()
+    fluid:init()
 
     love.window.setMode(N * size, N * size)
 end

@@ -19,7 +19,7 @@ local function bound(b, s, N)
         .                  .
         (1,N)      ...    (N,N)
     ]]
-    for i = 2, (N_ - 1) do
+    for i = 2, (N - 1) do
         s[i][1] = (b == 2) and -s[i][2] or s[i][2]       -- Bottom Bound
         s[i][N] = (b == 2) and -s[i][N - 1] or s[i][N - 1] -- Top Bound
         s[1][i] = (b == 1) and -s[2][i] or s[2][i]       -- Left Bound
@@ -193,7 +193,11 @@ function fluid:init()
 
 end
 
+function fluid.simulate(dt)
 
+    
+
+end
 
 
 
