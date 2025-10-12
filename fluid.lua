@@ -316,5 +316,11 @@ function fluid:addDensity(x, y, amt)
     end
 end
 
+function fluid:addVelocity(x, y, amtX, amtY)
+    if x > 1 and x < N and y > 1 and y < N then
+        self.Vx[x][y] = self.Vx[x][y] + amtX
+        self.Vy[x][y] = self.Vy[x][y] + amtY
+    end
+end
 
 return fluid
