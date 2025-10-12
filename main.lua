@@ -45,6 +45,8 @@ function love.mousemoved(x, y, dx, dy)
         fluid:create(x, y, dx, dy, mouseDensity, 20, 20)
     elseif love.mouse.isDown(2) then
         fluid:create(x, y, dx, dy, -mouseDensity, 20, 20)
+    elseif love.mouse.isDown(3) then
+        fluid:clear(x, y)
     end
 end
 

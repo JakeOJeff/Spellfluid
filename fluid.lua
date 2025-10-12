@@ -350,7 +350,7 @@ function fluid:clear(x, y)
 
     normX = clamp(normX, 2, N - 1)
     normY = clamp(normY, 2, N - 1)
-    self:addDensity(normX, normY, 100)
+    self:addDensity(normX, normY, -100)
 end
 
 return fluid
