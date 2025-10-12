@@ -164,6 +164,37 @@ end
 
 function Project(Vx, Vy, p, div)
 
+    --[[
+
+        Information Stated below are sourced externally [ Algorithms are compiled using Artifical Intelligence ]
+    
+        Making fluid incompressible
+
+        First for loop ( j x i ) :
+            Computes divergence
+            Measure how much fluid enters/leaves.
+                Enters > Leaves = +ve Divergence
+                Leaves > Enters = -ve Divergence
+
+        
+        Second for loop :
+            Solve for pressure
+
+            Gauss-Seidel relaxtion -> iteratively Poisson Equation
+            ∇2p = div
+            
+            Pressure spreads out evenly - >
+                High Pressure areas push back on lower ones
+
+        
+        Third for loop :
+            Actual projection
+            Push the velocity field in the opposite direction of pressure gradient
+            balancing out any divergence
+
+            ∇⋅V = 0 [ V is vector, but I am unable to represent that here]
+
+    ]]
 
     for j = 2, N - 1 do
         for i = 2, N - 1 do
