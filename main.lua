@@ -7,22 +7,7 @@ ITER = 8 -- Gauss–Seidel Iteration Method
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
 
--- Helper Functions
-local function exp(x) -- Exponential Function
-    return math.exp(x)
 
-    --[[
-        exp(x)= e^x | e ≈ 2.71828
-    ]]
-end
-
-local function floor(x)
-    return math.floor(x)
-end
-
-local function clamp(value, lower, upper)
-    return math.max(lower, math.min(value, upper))
-end
 
 
 local function bound(b, s, N)
