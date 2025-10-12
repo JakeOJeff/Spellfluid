@@ -9,6 +9,7 @@ function love.load()
     wW, wH = 720, 720
     size = wW / N 
     fluid:init()
+    fluid:solidCircle(N/2, N/2, 10)
     love.window.setMode(wW, wH)
 end
 
@@ -26,12 +27,18 @@ function love.draw()
         This is done by using a for loop to loop over all the grid cells and their
         corresponding density.
     
+        If object is not solid, draw fluid, else draw the solid object
     ]]
     for i = 1, N do
         for j = 1, N do
-            local d = math.min(fluid.s[i][j] / 100, 1)
-            love.graphics.setColor(d, d, d, 1) -- Setting color transparency ~ density
-            love.graphics.rectangle("fill", (i-1) * size, (j-1)*size, size, size ) -- Drawing grid elements
+            if fluid.boundary[i][j] == 0 then
+                local d = math.min(fluid.s[i][j] / 100, 1)
+                love.graphics.setColor(d, d, d, 1) -- Setting color transparency ~ density
+                love.graphics.rectangle("fill", (i-1) * size, (j-1)*size, size, size ) -- Drawing grid elements
+            else
+                love.graphics.setColor(0.7, 0.7, 0.7, 1)
+                love.graphics.rectangle("fill", (i-1) * size, (j-1)*size, size, size)
+            end
         end
     end
 end
