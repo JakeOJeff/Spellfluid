@@ -31,10 +31,33 @@ local function bound(b, s, n)
 
 
     for i = 2, (N - 1) do
-        s[i][1] = (b == 2) and -s[i][2] or s[i][2]       -- Bottom Bound
-        s[i][N] = (b == 2) and -s[i][N - 1] or s[i][N - 1] -- Top Bound
-        s[1][i] = (b == 1) and -s[2][i] or s[2][i]       -- Left Bound
-        s[N][i] = (b == 1) and -s[N - 1][i] or s[N - 1][i] -- Right Bound
+
+        if fluid.boundary[i][1] == 0 then
+            s[i][1] = (b == 2) and -s[i][2] or s[i][2]       -- Bottom Bound
+        else
+            s[i][1] = 0
+        end
+
+        if fluid.boundary[i][N] == 0 then
+            s[i][N] = (b == 2) and -s[i][N - 1] or s[i][N - 1] -- Top Bound
+        else
+            s[i][N] = 0
+        end
+
+        if fluid.boundary[1][i] == 0 then
+            s[1][i] = (b == 1) and -s[2][i] or s[2][i]       -- Left Bound
+        else
+            s[1][i] = 0
+        end
+
+        if fluid.boundary[N][i] == 0 then
+            s[N][i] = (b == 1) and -s[N - 1][i] or s[N - 1][i] -- Right Bound
+        else
+            s[N][i] = 0
+        end
+        
+        
+        
     end
 
     -- Corner Cells  = avg of neighbours
