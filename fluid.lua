@@ -419,4 +419,51 @@ function fluid:solidCircle(cx, cy, radius)
 
 end
 
+function fluid:getNormalizedPressure(i , j)
+    local pressure = self.s[i][j] or 0
+    local minPressure = 0.1
+    local maxPressure = -0.1
+
+    local normalized = (pressure - minPressure) / (maxPressure - minPressure)
+    
+    return clamp(normalized, 0, 1)
+
+end
+
+function fluid:getPressureColor(i , j)
+    
+
+    local r, g, b
+    local d = math.min(self.s[i][j], 1)
+
+    local normalized = self:getNormalizedPressure(i , j)
+
+    if normalized < 0.25 then
+        -- Red to Yellow
+        local t = normalized * 4
+        r = 1.0
+        g = t
+        b = 0
+    elseif normalized < 0.5 then
+        -- Yellow to Green
+        local t = (normalized - 0.25) * 4
+        r = 1.0 - t
+        g = 1.0
+        b = 0
+    elseif normalized < 0.75 then
+        -- Green to Cyan
+        local t = (normalized - 0.5) * 4
+        r = 0
+        g = 1.0
+        b = t
+    else
+        -- Cyan to Blue
+        local t = (normalized - 0.75) * 4
+        r = 0
+        g = 1.0 - t
+        b = 1.0
+    end
+    return r, g, b, d
+end
+
 return fluid

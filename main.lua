@@ -6,6 +6,7 @@ local mouseDensity = 100
 
 function love.load()
     wW, wH = 720, 720
+    pressureMap = false
     size = wW / N
     fluid:init()
     fluid:solidCircle(N / 2, N / 2, 10)
@@ -14,7 +15,6 @@ end
 
 function love.update(dt)
     fluid:simulate(dt)
-
     if love.keyboard.isDown("d") then
         fluid:create(0, wH/2, 1, 0, mouseDensity * 2, 20, 0)
     end        
@@ -41,18 +41,23 @@ function love.draw()
 
         If object is not solid, draw fluid, else draw the solid object
     ]]
-    for i = 1, N do
-        for j = 1, N do
-            if fluid.boundary[i][j] == 0 then
-                local d = math.min(fluid.s[i][j] / 100, 1)
-                love.graphics.setColor(d, d, d, 1)                                     -- Setting color transparency ~ density
-                love.graphics.rectangle("fill", (i - 1) * size, (j - 1) * size, size, size) -- Drawing grid elements
-            else
-                love.graphics.setColor(0.7, 0.7, 0.7, 1)
-                love.graphics.rectangle("fill", (i - 1) * size, (j - 1) * size, size, size)
+    
+        for i = 1, N do
+            for j = 1, N do
+                if fluid.boundary[i][j] == 0 then
+                    local d = math.min(fluid.s[i][j] / 100, 1)
+                    love.graphics.setColor(1,1,1,d)           
+                    if not pressureMap then
+                        local r, g, b, d = fluid:getPressureColor(i, j)
+                        love.graphics.setColor(r, g, b, d)
+                    end-- Setting color transparency ~ density
+                    love.graphics.rectangle("fill", (i - 1) * size, (j - 1) * size, size, size) -- Drawing grid elements
+                else
+                    love.graphics.setColor(0.7, 0.7, 0.7, 1)
+                    love.graphics.rectangle("fill", (i - 1) * size, (j - 1) * size, size, size)
+                end
             end
         end
-    end
 end
 
 function love.mousemoved(x, y, dx, dy)
@@ -91,5 +96,7 @@ function love.keypressed(key)
     elseif key == "c" then
         fluid:init()
         fluid:solidCircle(N / 2, N / 2, 10)
+    elseif key == "p" then
+        pressureMap = not pressureMap
     end
 end
