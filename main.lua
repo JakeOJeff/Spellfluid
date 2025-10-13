@@ -98,5 +98,16 @@ function love.keypressed(key)
         fluid:solidCircle(N / 2, N / 2, 10)
     elseif key == "p" then
         pressureMap = not pressureMap
+    -- Add laminar flow controls
+    elseif key == "1" then
+        fluid:createLaminarFlow("right", 8, 10, N/2)
+    elseif key == "2" then
+        fluid:createChannelFlow(true, 10, 15)
+    elseif key == "3" then
+        fluid:createShearFlow(8, N/2)
+    elseif key == "4" then
+        -- Create multiple parallel flows
+        fluid:createLaminarFlow("right", 6, 6, N/3)
+        fluid:createLaminarFlow("right", 6, 6, 2*N/3)
     end
 end

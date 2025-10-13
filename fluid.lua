@@ -465,5 +465,117 @@ function fluid:getPressureColor(i , j)
     end
     return r, g, b, d
 end
+function fluid:createLaminarFlow(direction, strength, width, position)
+    --[[
+        Creates laminar flow (smooth, parallel flow)
+        
+        Parameters:
+        direction - "left", "right", "up", "down"
+        strength - velocity magnitude
+        width - thickness of the flow stream
+        position - position along the perpendicular axis
+    ]]
+    
+    local center = math.floor(position or (N / 2))
+    local halfWidth = math.floor((width or 5) / 2)
+    
+    for j = 2, N - 1 do
+        for i = 2, N - 1 do
+            -- Check if current cell is within the flow stream
+            local inFlow = false
+            
+            if direction == "left" or direction == "right" then
+                -- Horizontal flow: check vertical position
+                inFlow = (j >= center - halfWidth and j <= center + halfWidth)
+            else
+                -- Vertical flow: check horizontal position
+                inFlow = (i >= center - halfWidth and i <= center + halfWidth)
+            end
+            
+            if inFlow and fluid.boundary[i][j] == 0 then
+                if direction == "left" then
+                    self.Vx[i][j] = self.Vx[i][j] - strength
+                elseif direction == "right" then
+                    self.Vx[i][j] = self.Vx[i][j] + strength
+                elseif direction == "up" then
+                    self.Vy[i][j] = self.Vy[i][j] - strength
+                elseif direction == "down" then
+                    self.Vy[i][j] = self.Vy[i][j] + strength
+                end
+                
+                -- Add some density to visualize the flow
+                self.s[i][j] = math.min(self.s[i][j] + (strength * 0.5), 100)
+            end
+        end
+    end
+end
 
+function fluid:createChannelFlow(horizontal, strength, densityAmount)
+    --[[
+        Creates flow between two parallel boundaries (like in a channel)
+        
+        Parameters:
+        horizontal - true for horizontal channel, false for vertical
+        strength - flow velocity
+        densityAmount - density to add for visualization
+    ]]
+    
+    if horizontal then
+        -- Horizontal channel flow (left to right)
+        for j = 2, N - 1 do
+            for i = 2, N - 1 do
+                if fluid.boundary[i][j] == 0 then
+                    -- Parabolic velocity profile (faster in center, slower near walls)
+                    local normalizedPos = (j - 2) / (N - 3)
+                    local velocityProfile = 4 * normalizedPos * (1 - normalizedPos)
+                    
+                    self.Vx[i][j] = self.Vx[i][j] + strength * velocityProfile
+                    self.s[i][j] = math.min(self.s[i][j] + densityAmount * velocityProfile, 100)
+                end
+            end
+        end
+    else
+        -- Vertical channel flow (top to bottom)
+        for j = 2, N - 1 do
+            for i = 2, N - 1 do
+                if fluid.boundary[i][j] == 0 then
+                    -- Parabolic velocity profile
+                    local normalizedPos = (i - 2) / (N - 3)
+                    local velocityProfile = 4 * normalizedPos * (1 - normalizedPos)
+                    
+                    self.Vy[i][j] = self.Vy[i][j] + strength * velocityProfile
+                    self.s[i][j] = math.min(self.s[i][j] + densityAmount * velocityProfile, 100)
+                end
+            end
+        end
+    end
+end
+
+function fluid:createShearFlow(strength, position)
+    --[[
+        Creates shear flow (fluid moving in opposite directions)
+        
+        Parameters:
+        strength - velocity magnitude
+        position - y-position of the shear line
+    ]]
+    
+    local shearLine = position or math.floor(N / 2)
+    
+    for j = 2, N - 1 do
+        for i = 2, N - 1 do
+            if fluid.boundary[i][j] == 0 then
+                if j < shearLine then
+                    -- Flow to the right above shear line
+                    self.Vx[i][j] = self.Vx[i][j] + strength
+                else
+                    -- Flow to the left below shear line
+                    self.Vx[i][j] = self.Vx[i][j] - strength
+                end
+                
+                self.s[i][j] = math.min(self.s[i][j] + strength * 0.3, 100)
+            end
+        end
+    end
+end
 return fluid
