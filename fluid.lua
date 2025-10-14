@@ -79,6 +79,7 @@ function Force(Vx, Vy, Fx, Fy, x, y, radius, dt)
         dt = deltatime
 
     ]]
+    
 
     for i = (x - radius), (x + radius) do
         for j = (y - radius), (y + radius) do
@@ -417,6 +418,14 @@ function fluid:solidCircle(cx, cy, radius)
     end
 
 
+end
+
+function fluid:clearSolids()
+        for i = 1, N do
+            for j = 1, N do
+                self.boundary[i][j] = 0 
+            end
+        end
 end
 
 function fluid:getNormalizedPressure(i , j)
