@@ -1,6 +1,6 @@
 # Spell Fluid
 
-Spellfluid is a magical fluid simulator written in Lua, inspired by GridFluids – Fluid–Euler Particle (University of Freiburg). It simulates flowing, glowing, spell-like fluids using a simple grid + particle system — perfect for games, visual effects, or experiments.
+Spellfluid is a magical fluid simulator written in Lua, inspired by GridFluids, Fluid–Euler Particle (University of Freiburg). It simulates flowing, glowing, spell-like fluids using a simple grid + particle system, perfect for games, visual effects, or experiments.
 
 ## Features
 
