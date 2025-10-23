@@ -40,7 +40,7 @@ C → Reset the simulation
 1, 2, 3, 4 → Different types of Flow
 
 
-## ( FOR DEVELOEPRS )
+## ( FOR DEVELOPERS )
 - Adjust simulation settings in main.lua or fluid.lua:
 
 fluid:setViscosity(0.002)
