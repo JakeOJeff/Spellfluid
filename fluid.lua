@@ -7,6 +7,7 @@ ITER = 8 -- Gauss–Seidel Iteration Method
 DIFF = 0.0001
 VISC = 0.0001
 
+
 -- NOTE FROM CREATOR : x and y will be represented as i and j to sync with the formulas
 
 local function bound(b, s, n)
@@ -55,12 +56,10 @@ local function bound(b, s, n)
         else
             s[N][i] = 0
         end
-        
-        
-        
+         
     end
 
-    -- Corner Cells  = avg of neighbours
+    -- -- Corner Cells  = avg of neighbours
     s[1][1] = 0.5 * (s[2][1] + s[1][2])
     s[1][N] = 0.5 * (s[2][N] + s[1][N - 1])
     s[N][1] = 0.5 * (s[N - 1][1] + s[N][2])
@@ -293,6 +292,8 @@ function fluid:init()
     self.p = {}
     self.div = {}
     self.boundary = {}
+    
+    
 
     -- 2 dimensional array setup, i for colums and j for rows, using table in table method
     
